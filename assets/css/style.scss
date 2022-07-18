@@ -1,0 +1,27 @@
+---
+---
+
+@import "{{ site.theme }}";
+h1 {
+  margin: 30px 0;
+  font-size: 4em;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.robot {
+  font-family: monospace;
+}
+
+form,p{
+  margin-bottom: 20px;
+}
+
+nav a {
+  font-size: 16pt;
+}
+
+nav a:after {
+  white-space: pre-wrap;
+  content: "\A";
+}
