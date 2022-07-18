@@ -1,0 +1,12 @@
+<script>
+  window.onload = function () {
+    let select = document.getElementById("subject");
+    let options = select.children;
+    for (let opt of options) {
+      if (opt.value == "{{ include.selection }}") {
+        opt.selected = true;
+      }
+    }
+    select.disabled = true;
+  }
+</script>
