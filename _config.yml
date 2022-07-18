@@ -24,6 +24,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "maxtarlov.github.io/interview-bot-website" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
+
+theme: jekyll-theme-minimal
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
   - jekyll-feed
@@ -49,4 +51,3 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-theme: jekyll-theme-minimal
