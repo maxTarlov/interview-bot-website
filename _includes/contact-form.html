@@ -1,0 +1,30 @@
+<div class="contact-form">
+  <form id="contact-form" method="POST">
+    <table>
+      <tr>
+        <th scope="row"><label for="subject">I want to </label></th>
+        <td>
+          <select id="subject" name="subject">
+            <option value="job-opportunity">speak with you about a job opportunity</option>
+            <option value="feedback" selected>provide feedback on your project</option>
+            <option value="license">inquire about using your work</option>
+            <option value="other">contact you for some other reason</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row"><label for="name">Your name</label></th>
+        <td><input type="text" id="name" name="name" placeholder="Your Name"></td>
+      </tr>
+      <tr>
+        <th scope="row"><label for="email">Your email</label></th>
+        <td><input type="email" id="email" name="email" placeholder="name@example.com"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><textarea id="body" name="body" placeholder="What would you like to tell me?" style="height:200px; width:350px"></textarea></td>
+      </tr>
+    </table>
+    <input type="submit" value="Submit">
+
+  </form>
+</div>
