@@ -21,7 +21,7 @@
 title: Interview bot
 description: Interviews are tedious. Let's automate them instead.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "maxtarlov.github.io/interview-bot-website" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 remote_theme: pages-themes/minimal@v0.2.0
