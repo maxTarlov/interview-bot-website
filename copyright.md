@@ -11,5 +11,4 @@ I strongly believe in open source software, not least because it allows people l
 
 However, natural language writing is different from code. There are an infinite number of ways to convey the same message in writing, and I think it *is* fair for me to expect others not to plagiarize how I convey my message here. To guard against that, I have retained the copyright to this site and the text cells of the accompanying instructional notebooks. This is not to say that you can never use my writing; if you would like to license part or all of my site or notebooks, please fill out the contact form below. Depending on what you want to do with my work, chances are that I will provide you with the license for free&mdash;__but you must ask first__.
 
-{% include contact-form.html %}
-{% include lock-form-subject.html selection="license" %}
+{% include contact-form.html type="license" %}

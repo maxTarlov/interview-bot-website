@@ -1,30 +1,7 @@
-<div class="contact-form">
-  <form id="contact-form" method="POST">
-    <table>
-      <tr>
-        <th scope="row"><label for="subject">I want to </label></th>
-        <td>
-          <select id="subject" name="subject">
-            <option value="job-opportunity">speak with you about a job opportunity</option>
-            <option value="feedback" selected>provide feedback on your project</option>
-            <option value="license">inquire about using your work</option>
-            <option value="other">contact you for some other reason</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row"><label for="name">Your name</label></th>
-        <td><input type="text" id="name" name="name" placeholder="Your Name"></td>
-      </tr>
-      <tr>
-        <th scope="row"><label for="email">Your email</label></th>
-        <td><input type="email" id="email" name="email" placeholder="name@example.com"></td>
-      </tr>
-      <tr>
-        <td colspan="2"><textarea id="body" name="body" placeholder="What would you like to tell me?" style="height:200px; width:350px"></textarea></td>
-      </tr>
-    </table>
-    <input type="submit" value="Submit">
-
-  </form>
-</div>
+{% if include.type == "license" %}
+  <!-- license type -->
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeP_xWwRXoPP03AHFJEIUceQGt89awMcwzrQ0iDCQDetcRdng/viewform?embedded=true" width="500" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+{% else %}
+<!-- contact type -->
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSchWGPWQeFNKtmzjlXsnOZt1p4hVBWB_nSZm4l18IbtG6oTaQ/viewform?embedded=true" width="500" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+{% endif %}
