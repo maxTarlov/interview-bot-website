@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
     function sendData() {
         console.log(form['user-question'].value);
         console.log("Sending user question");
-        fetch(`https://handle-question-irwuk7yqaq-uc.a.run.app/?q=${encodeURIComponent(form['user-question'].value)}}`)
+        fetch(`https://handle-question-irwuk7yqaq-uc.a.run.app/?q=${encodeURIComponent(form['user-question'].value)}`)
             .then((response) => response.json())
             .then((data) => {
                 form['user-question'].value = data['user-question'];
