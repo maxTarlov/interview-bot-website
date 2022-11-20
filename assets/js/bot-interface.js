@@ -1,6 +1,8 @@
 // Javascript for bot interface
 
 window.addEventListener("load", () => {
+
+    const backEndURL = "https://handle-question-irwuk7yqaq-uw.a.run.app/";
     
     function handleResponse(data) {
         form['user-question'].value = data['user-question'];
@@ -13,7 +15,7 @@ window.addEventListener("load", () => {
 
     function warmUpCloudFunction() {
         console.log("Warming up cloud function");
-        fetch("https://handle-question-irwuk7yqaq-uw.a.run.app/")
+        fetch(backEndURL)
             .then((response) => response.json())
             .then(handleResponse);
     }
@@ -21,7 +23,7 @@ window.addEventListener("load", () => {
     function sendData() {
         responseArea.textContent = "Loading...";
         console.log("Sending user question");
-        fetch(`https://handle-question-irwuk7yqaq-uw.a.run.app/?q=${encodeURIComponent(form['user-question'].value)}`)
+        fetch(`${backEndURL}?q=${encodeURIComponent(form['user-question'].value)}`)
             .then((response) => response.json())
             .then(handleResponse);
     }
