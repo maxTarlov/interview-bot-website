@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
 
     function warmUpCloudFunction() {
         console.log("Warming up cloud function");
-        fetch("https://handle-question-irwuk7yqaq-uc.a.run.app/")
+        fetch("https://handle-question-irwuk7yqaq-uw.a.run.app/")
             .then((response) => response.json())
             .then(handleResponse);
     }
@@ -21,7 +21,7 @@ window.addEventListener("load", () => {
     function sendData() {
         responseArea.textContent = "Loading...";
         console.log("Sending user question");
-        fetch(`https://handle-question-irwuk7yqaq-uc.a.run.app/?q=${encodeURIComponent(form['user-question'].value)}`)
+        fetch(`https://handle-question-irwuk7yqaq-uw.a.run.app/?q=${encodeURIComponent(form['user-question'].value)}`)
             .then((response) => response.json())
             .then(handleResponse);
     }
