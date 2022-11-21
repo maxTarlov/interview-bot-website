@@ -46,12 +46,46 @@ window.addEventListener("load", () => {
         feedbackPositive.disabled = true;
         feedbackNegative.disabled = true;
     }
+
+    function suggestionHandlerFactory(suggestedQuestion) {
+        function result() {
+            form['user-question'].value = suggestedQuestion;
+            handleSubmit();
+        }
+        return result
+    }
+
+    function enableSuggestionLinks(suggestions) {
+        for(let i = 0; i < suggestionLinks.length; i++) {
+            let currLI = suggestionLinks[i];
+            console.assert(currLI.children.length == 1);
+            let oldChild = currLI.children[0];
+            let link = document.createElement("a");
+            link.textContent = suggestions[i];
+            link.addEventListener("click", suggestionHandlerFactory(suggestions[i]));
+            currLI.replaceChild(link, oldChild);
+            console.assert(currLI.children.length == 1);
+        }
+    }
+
+    function disableSuggestionLinks() {
+        for(let i = 0; i < suggestionLinks.length; i++) {
+            let currLI = suggestionLinks[i];
+            let oldChild = currLI.children[0];
+            console.assert(currLI.children.length == 1);
+            let span = document.createElement("span");
+            span.textContent = "Loading...";
+            currLI.replaceChild(span, oldChild);
+            console.assert(currLI.children.length == 1);
+        }
+    }
     
     function handleResponse(data) {
         form['user-question'].value = data['user-question'];
         responseArea.textContent = data['bot-answer'];
         form['user-question'].disabled = false;
         submitButton.disabled = false;
+        enableSuggestionLinks(data['suggestions'])
         enableFeedbackButtons(data['id']);
         console.log("Cloud function response:");
         console.log(data);
@@ -72,8 +106,17 @@ window.addEventListener("load", () => {
             .then(handleResponse);
     }
 
+    function handleSubmit() {
+        form['user-question'].disabled = true;
+        submitButton.disabled = true;
+        disableFeedbackButtons();
+        disableSuggestionLinks();
+        sendData();
+    }
+
     const backEndURL = "https://handle-question-irwuk7yqaq-uw.a.run.app/";
 
+    const suggestionLinks = document.getElementById("suggestion-list").children;
     const form = document.getElementById("bot-ui-form");
     const submitButton = document.getElementById("submit-button");
     const responseArea = document.getElementById("response-text");
@@ -85,9 +128,6 @@ window.addEventListener("load", () => {
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
-        form['user-question'].disabled = true;
-        submitButton.disabled = true;
-        disableFeedbackButtons();
-        sendData();
+        handleSubmit();
     });
 });
