@@ -36,7 +36,10 @@ window.addEventListener("load", () => {
 
     function enableFeedbackButtons(logID) {
         feedbackPositive.disabled = false;
-        feedbackNegative.disabled = false; 
+        feedbackNegative.disabled = false;
+
+        feedbackPositive.addEventListener("click", feedbackHandlerFactory(logID, true));
+        feedbackNegative.addEventListener("click", feedbackHandlerFactory(logID, false));   
     }
 
     function disableFeedbackButtons() {
@@ -120,9 +123,6 @@ window.addEventListener("load", () => {
 
     const feedbackPositive = document.getElementById("feedback-positive");
     const feedbackNegative = document.getElementById("feedback-negative");
-
-    feedbackPositive.addEventListener("click", feedbackHandlerFactory(logID, true));
-    feedbackNegative.addEventListener("click", feedbackHandlerFactory(logID, false));  
 
     warmUpCloudFunction();
 
