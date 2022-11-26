@@ -2,7 +2,7 @@
 
 window.addEventListener("load", () => {
 
-    function feedbackHandlerFactory(logID, good) {
+    function feedbackHandlerFactory(good) {
         function result() {
             if(good) {
                 feedbackPositive.disabled = true;
@@ -34,12 +34,9 @@ window.addEventListener("load", () => {
         return result
     }
 
-    function enableFeedbackButtons(logID) {
+    function enableFeedbackButtons() {
         feedbackPositive.disabled = false;
         feedbackNegative.disabled = false;
-
-        feedbackPositive.addEventListener("click", feedbackHandlerFactory(logID, true));
-        feedbackNegative.addEventListener("click", feedbackHandlerFactory(logID, false));   
     }
 
     function disableFeedbackButtons() {
@@ -86,7 +83,8 @@ window.addEventListener("load", () => {
         form['user-question'].disabled = false;
         submitButton.disabled = false;
         enableSuggestionLinks(data['suggestions'])
-        enableFeedbackButtons(data['id']);
+        logID = data['id'];
+        enableFeedbackButtons();
         console.log("Cloud function response:");
         console.log(data);
     }
@@ -124,7 +122,12 @@ window.addEventListener("load", () => {
     const feedbackPositive = document.getElementById("feedback-positive");
     const feedbackNegative = document.getElementById("feedback-negative");
 
+    let logID;
+
     warmUpCloudFunction();
+
+    feedbackPositive.addEventListener("click", feedbackHandlerFactory(true));
+    feedbackNegative.addEventListener("click", feedbackHandlerFactory(false)); 
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
