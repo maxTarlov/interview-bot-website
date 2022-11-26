@@ -26,8 +26,8 @@ window.addEventListener("load", () => {
                 body: JSON.stringify(feedbackData),
                 })
                 .then((response) => {
-                    console.log(`Feedback status: ${response.status}`)
-                    console.log(response)
+                    console.log(`Feedback status: ${response.status}`);
+                    console.log(response);
                 });
         }
         
@@ -82,7 +82,7 @@ window.addEventListener("load", () => {
         responseArea.textContent = data['bot-answer'];
         form['user-question'].disabled = false;
         submitButton.disabled = false;
-        enableSuggestionLinks(data['suggestions'])
+        enableSuggestionLinks(data['suggestions']);
         logID = data['id'];
         enableFeedbackButtons();
         console.log("Cloud function response:");
