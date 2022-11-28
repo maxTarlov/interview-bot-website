@@ -78,8 +78,8 @@ window.addEventListener("load", () => {
     }
     
     function handleResponse(data) {
-        form['user-question'].value = data['user-question'];
-        responseArea.textContent = data['bot-answer'];
+        form['user-question'].value = data['user_question'];
+        responseArea.textContent = data['bot_answer'];
         form['user-question'].disabled = false;
         submitButton.disabled = false;
         enableSuggestionLinks(data['suggestions']);
@@ -112,7 +112,7 @@ window.addEventListener("load", () => {
         sendData();
     }
 
-    const backEndURL = "https://handle-question-irwuk7yqaq-uw.a.run.app/";
+    const backEndURL = "http://localhost:8080";
 
     const suggestionLinks = document.getElementById("suggestion-list").children;
     const form = document.getElementById("bot-ui-form");
