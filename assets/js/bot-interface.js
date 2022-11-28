@@ -112,7 +112,7 @@ window.addEventListener("load", () => {
         sendData();
     }
 
-    const backEndURL = "http://localhost:8080";
+    const backEndURL = "https://handle-question-irwuk7yqaq-uw.a.run.app";
 
     const suggestionLinks = document.getElementById("suggestion-list").children;
     const form = document.getElementById("bot-ui-form");
