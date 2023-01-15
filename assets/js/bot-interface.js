@@ -3,7 +3,7 @@
 window.addEventListener("load", () => {
 
     function feedbackHandlerFactory(good) {
-        function result() {
+        async function result() {
             if(good) {
                 feedbackPositive.disabled = true;
                 feedbackNegative.disabled = false;
@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
             }
 
             const feedbackData = {
-                "id": logID,
+                "id": await logID,
                 "good": good
             }
             
@@ -84,14 +84,18 @@ window.addEventListener("load", () => {
         submitButton.disabled = false;
         enableSuggestionLinks(data['suggestions']);
         logID = await data['id'];
+        serverReady = true;
         enableFeedbackButtons();
         console.log("Cloud function response:");
         console.log(data);
     }
 
-    async function warmUpCloudFunction() {
+    function warmUpCloudFunction() {
         console.log("Warming up cloud function");
-        handleResponse({
+        let warmUpID = fetch(backEndURL)
+            .then((response) => response.json())
+            .then((data) => data['id']);
+        let pre_load_data = {
             "user_question": "Tell me about yourself.",
             "bot_answer": "I am a chatbot designed to answer common interview questions\
                            naturalistically. My author created me to learn more about\
@@ -102,14 +106,14 @@ window.addEventListener("load", () => {
                 "What are your weaknesses",
                 "What three character traits would your friends use to describe you?"
             ],
-            "id": fetch(backEndURL)
-                .then((response) => response.json())
-                .then((data) => data['id'])
-        })
+            "id": warmUpID
+        }
+        handleResponse(pre_load_data);
+        return warmUpID;
     }
 
-    function sendData() {
-        responseArea.textContent = "Loading...";
+    async function sendData() {
+        await logID;  // waits for server to be warm
         console.log("Sending user question");
         fetch(`${backEndURL}?q=${encodeURIComponent(form['user-question'].value)}`)
             .then((response) => response.json())
@@ -119,12 +123,13 @@ window.addEventListener("load", () => {
     function handleSubmit() {
         form['user-question'].disabled = true;
         submitButton.disabled = true;
+        responseArea.textContent = "Loading...";
         disableFeedbackButtons();
         disableSuggestionLinks();
         sendData();
     }
 
-    const backEndURL = "https://handle-question-irwuk7yqaq-uw.a.run.app";
+    const backEndURL = "http://localhost:8080"//"https://handle-question-irwuk7yqaq-uw.a.run.app";
 
     const suggestionLinks = document.getElementById("suggestion-list").children;
     const form = document.getElementById("bot-ui-form");
@@ -134,9 +139,7 @@ window.addEventListener("load", () => {
     const feedbackPositive = document.getElementById("feedback-positive");
     const feedbackNegative = document.getElementById("feedback-negative");
 
-    let logID;
-
-    warmUpCloudFunction();
+    let logID = warmUpCloudFunction();
 
     feedbackPositive.addEventListener("click", feedbackHandlerFactory(true));
     feedbackNegative.addEventListener("click", feedbackHandlerFactory(false)); 
