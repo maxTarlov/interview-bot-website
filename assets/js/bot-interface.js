@@ -77,23 +77,35 @@ window.addEventListener("load", () => {
         }
     }
     
-    function handleResponse(data) {
+    async function handleResponse(data) {
         form['user-question'].value = data['user_question'];
         responseArea.textContent = data['bot_answer'];
         form['user-question'].disabled = false;
         submitButton.disabled = false;
         enableSuggestionLinks(data['suggestions']);
-        logID = data['id'];
+        logID = await data['id'];
         enableFeedbackButtons();
         console.log("Cloud function response:");
         console.log(data);
     }
 
-    function warmUpCloudFunction() {
+    async function warmUpCloudFunction() {
         console.log("Warming up cloud function");
-        fetch(backEndURL)
-            .then((response) => response.json())
-            .then(handleResponse);
+        handleResponse({
+            "user_question": "Tell me about yourself.",
+            "bot_answer": "I am a chatbot designed to answer common interview questions\
+                           naturalistically. My author created me to learn more about\
+                           different AI technologies and get hands-on experience with\
+                           deploying a machine learning model.",
+            "suggestions": [
+                "What are your strengths",
+                "What are your weaknesses",
+                "What three character traits would your friends use to describe you?"
+            ],
+            "id": fetch(backEndURL)
+                .then((response) => response.json())
+                .then((data) => data['id'])
+        })
     }
 
     function sendData() {
